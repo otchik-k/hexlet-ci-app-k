@@ -1,0 +1,15 @@
+name: first-workflow
+    on: push
+    jobs:
+        name_setup:
+            runs-on: ubuntu-latest
+            steps:
+                -uses: actions/checkout@v4
+                -uses: actions/setup-node@v4
+                -run: make setup
+        name_test:
+            needs: name_setup
+            runs-on: ubuntu-latest
+            steps:
+                -run: make test
+                -run: make lint
